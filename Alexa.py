@@ -1,4 +1,4 @@
-import speech_recoginition as sr
+import speech_recognition as sr
 import pyttsx3
 import datetime
 import wikipedia
@@ -9,10 +9,10 @@ def talk(text):
     """Make ALexa speak the given text"""
     engine=pyttsx3.init() #Reinitialize engine everytime
     voices = engine.getProperty('voices')
-    engine.setProperty('voice'. voices[0].id)
+    engine.setProperty('voice', voices[0].id)
     engine.say(text)
     engine.runAndWait()
-    engine .stop() #Stop the engine after speak
+    engine.stop()  # Stop the engine after speak
 
 
 def take_command():
@@ -24,6 +24,18 @@ def take_command():
             command = listener.recognize_google(voice)
             command = command.lower()
             if 'alexa' in command:
-                command = command.replace('alexa', '')
+                command = command.replace('alexa', '').strip()
                 print(f'Command: {command}')
                 return command
+    except Exception:
+        pass
+    return ''
+
+def run_alexa():
+    command = take_command()
+
+    if not command:
+        return
+    
+    if 'play' in command:
+        song = command.replace('play', '').strip()
