@@ -3,4 +3,5 @@ pyttsx3
 pyaudio
 pywhatkit
 wikipedia
-pyjokesc
+pyjokes
+urllib3<2
